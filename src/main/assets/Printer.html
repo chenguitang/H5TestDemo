@@ -1,0 +1,46 @@
+<html>
+
+<body>
+<p>
+    <xmp id="printer">
+    </xmp>
+</p>
+</p>
+<p>
+    <button type="button" style="height:50px;width:100px;margin-left:10px;"
+            onclick="printSample();">打印示列页面
+    </button>
+
+    <button type="button" style="height:50px;width:100px;margin-left:20px;" onclick="printImage();">
+        打印图片
+    </button>
+</p>
+</body>
+
+<script>
+        <!--调用Java中的方法 window.android定义类别名.类方法-->
+        function printSample(){
+            var printComplete=window.android.PrinterSample("Greetty")
+
+            //判断是否打印完成
+            if(printComplete){
+              document.getElementById("printer").innerHTML = "示列页面打印完成"
+            }else{
+              document.getElementById("printer").innerHTML = "示列页面打印失败，请检查打印机状态"
+            }
+        }
+
+        <!--调用Java中的方法 window.android定义类别名.类方法-->
+        function printImage(){
+            var path=window.android.PrinterImage("/mnt/sdcard/test.png")
+            document.getElementById("printer").innerHTML=path
+        }
+
+        <!--JS中的方法，该方法供java调用-->
+        function myJsFunction(){
+             document.getElementById("printer").innerHTML="我是JS中的方法，我被JAVA类调用了..."
+             window.android.getJsMethod("hello,我的名字叫JS AND HTML")
+        }
+</script>
+
+</html>
